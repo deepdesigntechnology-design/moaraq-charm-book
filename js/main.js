@@ -10,15 +10,15 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   const sections = document.querySelectorAll('section[id]');
   function updateActiveNav() {
-    const scrollY = window.scrollY + 110;
-    sections.forEach(section => {
-      const top = section.offsetTop;
-      const height = section.offsetHeight;
-      const id = section.getAttribute('id');
-      if (scrollY >= top && scrollY < top + height) {
-        navLinks.forEach(link => {
-          link.classList.remove('active');
-          if (link.getAttribute('href') === `#${id}`) link.classList.add('active');
+    const y = window.scrollY + 100;
+    sections.forEach(sec => {
+      const top = sec.offsetTop;
+      const h = sec.offsetHeight;
+      const id = sec.getAttribute('id');
+      if (y >= top && y < top + h) {
+        navLinks.forEach(l => {
+          l.classList.remove('active');
+          if (l.getAttribute('href') === '#' + id) l.classList.add('active');
         });
       }
     });
@@ -26,8 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', updateActiveNav);
   updateActiveNav();
   const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-  }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
-  reveals.forEach(el => observer.observe(el));
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
+  reveals.forEach(el => obs.observe(el));
 });
